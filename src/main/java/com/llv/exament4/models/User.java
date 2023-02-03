@@ -27,6 +27,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
 
     @ManyToOne
     private Group group;
@@ -51,7 +54,6 @@ public class User {
         this.name = name;
     }
 
-    
 
     // public List<Group> getGroups() {
     //     return groups;
@@ -106,5 +108,15 @@ public class User {
     public void setGroup(Group group) {
         this.group = group;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    
 
 }
