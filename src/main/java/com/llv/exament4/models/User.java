@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,11 +31,10 @@ public class User {
     @Column(name = "password")
     private String password;
 
-
     @ManyToOne
     private Group group;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER) // para que traiga las dependencias
     @JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private List<Permission> permissions;
 
@@ -54,13 +54,12 @@ public class User {
         this.name = name;
     }
 
-
     // public List<Group> getGroups() {
-    //     return groups;
+    // return groups;
     // }
 
     // public void setGroups(List<Group> groups) {
-    //     this.groups = groups;
+    // this.groups = groups;
     // }
 
     public List<Permission> getPermissions() {
@@ -69,28 +68,6 @@ public class User {
 
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 32));
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        User other = (User) obj;
-        if (id != other.id)
-            return false;
-        return true;
     }
 
     public String getEmail() {
@@ -117,6 +94,26 @@ public class User {
         this.password = password;
     }
 
-    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (id ^ (id >>> 32));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
 
 }

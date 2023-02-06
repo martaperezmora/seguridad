@@ -7,4 +7,5 @@ import com.llv.exament4.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    public User findByName(String nombre);
 }

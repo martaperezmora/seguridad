@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.llv.exament4.models.Group;
 import com.llv.exament4.models.Permission;
@@ -25,12 +26,15 @@ class Exament4ApplicationTests {
 	@Autowired
 	PermissionRepository permissionRepository;	
 
+	@Autowired
+	PasswordEncoder encoder;
+
 	@Test
 	void crearUsuariosTest(){
 		User u1 = new User();
 		u1.setId(1);
 		u1.setName("u1");
-		u1.setPassword("1234");
+		u1.setPassword(encoder.encode("1234"));
 		Group g1 = new Group();
 		g1.setId(1);
 		u1.setGroup(g1);
@@ -38,15 +42,15 @@ class Exament4ApplicationTests {
 		User u2 = new User();
 		u2.setId(2);
 		u2.setName("u2");
-		u2.setPassword("5555");
+		u2.setPassword(encoder.encode("5555"));
 		u2.setGroup(g1);
 
 		Permission p1 = new Permission();
-		p1.setId(10);
+		p1.setId(1);
 		p1.setName("ADMIN");
 
 		Permission p2 = new Permission();
-		p1.setId(20);
+		p1.setId(2);
 		p1.setName("USER");
 
 		List<Permission> permisos1 = new ArrayList<Permission>();
