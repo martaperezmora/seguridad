@@ -31,6 +31,7 @@ public class securityConfig{
         return new UserService();
     }
     
+    /*
     @Bean
     public UserDetailsService user(){
 
@@ -48,7 +49,7 @@ public class securityConfig{
 
         return new InMemoryUserDetailsManager(user,admin);
     }
-
+ */
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
